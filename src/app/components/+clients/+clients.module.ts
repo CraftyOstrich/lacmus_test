@@ -6,9 +6,11 @@ import { NgModule } from '@angular/core';
 
 import { ClientsRoutingModule } from './+clients-routing.module';
 import { ClientsComponent } from './+clients.component';
+import { CommonModule } from '@angular/common';
 
  @NgModule({
      imports: [
+       CommonModule,
        ClientsRoutingModule
      ],
      declarations: [

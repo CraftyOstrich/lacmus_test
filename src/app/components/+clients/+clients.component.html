@@ -1,3 +1,28 @@
-<p>
-  clients works!
-</p>
+<div class="clients">
+  <div class="clients__header">
+    <h2 class="clients_title">Clients List</h2>
+  </div>
+  <div class="clients__content">
+    <table class="table table-striped clients__list">
+      <thead>
+        <tr class="list__header">
+          <td>ФИО</td>
+          <td>Телефон</td>
+          <td>Email</td>
+          <td>Дата рождения</td>
+          <td>Адрес</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of _clients" class="list__item list__item-hover">
+          <td>{{ client.name }}</td>
+          <td>{{ client.phone ? client.phone : '-' }}</td>
+          <td>{{ client.email ? client.email : '-' }}</td>
+          <td>{{ _getBirthdayDate(client) }}</td>
+          <td>{{ client.address ? client.address : '-' }}</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
