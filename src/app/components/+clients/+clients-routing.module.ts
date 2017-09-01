@@ -11,16 +11,7 @@ const routes: Routes = [
   {
     path: '',
     component: ClientsComponent,
-    children: [
-      {
-        path: 'create',
-        loadChildren: 'app/components/+client/+client.module#ClientModule'
-      },
-      {
-        path: ':id',
-        loadChildren: 'app/components/+client/+client.module#ClientModule'
-      }
-    ]
+    pathMatch: 'full'
   }
 ];
 

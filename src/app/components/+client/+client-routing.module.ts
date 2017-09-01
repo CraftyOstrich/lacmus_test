@@ -9,8 +9,12 @@ import { ClientComponent } from './+client.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: ClientComponent,
+    path: ':id',
+    component: ClientComponent
+  },
+  {
+    path: 'create',
+    component: ClientComponent
   }
 ];
 

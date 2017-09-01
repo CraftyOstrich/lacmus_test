@@ -9,6 +9,7 @@ export class Client {
   public birthYear: number;
   public birthMonth: number;
   public birthDay: number;
+  public birthDate: Date;
   public phone: string;
   public email: string;
   public address: string;
@@ -28,9 +29,10 @@ export class Client {
     this.name = client.name;
     this.cardNumber = client.cardNumber;
     this.gender = client.gender;
-    this.birthYear = client.birthYear;
-    this.birthMonth = client.birthMonth;
     this.birthDay = client.birthDay;
+    this.birthMonth = client.birthMonth;
+    this.birthYear = client.birthYear;
+    this.birthDate = this._getBirthdayDate(client.birthDay, client.birthMonth, client.birthYear);
     this.phone = client.phone;
     this.email = client.email;
     this.address = client.address;
@@ -44,5 +46,21 @@ export class Client {
     this.tabNumber = client.tabNumber;
     this.divisionNumber = client.divisionNumber;
     this.accountId = client.accountId;
+  }
+
+  /**
+   *  Return clien's birthday as new Date
+   * @param date {number}
+   * @param month {number}
+   * @param year {number}
+   * @returns {Date}
+   * @private
+   */
+  private _getBirthdayDate(date: number, month: number, year: number) {
+    if (!date || !month || !year) {
+      return null;
+    } else {
+      return new Date(year, month - 1, date)
+    }
   }
 }

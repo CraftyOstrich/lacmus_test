@@ -1,3 +1,56 @@
-<p>
-  client works!
-</p>
+<div *ngIf="client" class="client">
+  <div class="client__header">
+    <h3 class="client_title">Карточка клиента №{{ client.cardNumber }}</h3>
+  </div>
+  <div class="client__card">
+    <form class="form-inline"  [formGroup]="clientForm">
+      <div class="client__card__item">
+        <div class="card__item card__name">
+          <label for="name" class="card__name_label">ФИО</label><br>
+          <input id="name" type="text"
+                 formControlName="name" class="form-control card__name_value">
+        </div>
+        <div class="card__item card__gender">
+          <input type="radio" formControlName="gender"
+                 value="female" class="card__gender_checkbox">Жен.
+          <input type="radio" formControlName="gender"
+                 value="male" class="card__gender_checkbox">Муж.
+        </div>
+        <div class="card__item card__date">
+          <label>Дата рождения</label><br>
+          <p-calendar inputStyleClass="form-control"
+                      formControlName="date" dateFormat="dd/mm/yy"
+                      >{{ client.birthDate }}</p-calendar>
+        </div>
+      </div>
+      <div class="client__card__item">
+        <div class="card__item ">
+          <label for="phone">Телефон</label><br>
+          <input id="phone" class="form-control card__phone_value"
+                 placeholder="+380(__)__ __ ___"
+                 formControlName="phone" type="text" >
+        </div>
+        <div class="card__item"><br>
+          <label for="email">Электронный адрес</label><br>
+          <input id="email" class="form-control card__email_value"
+                 placeholder="example@gmail.com"
+                 formControlName="email" type="email">
+        </div>
+        <div class="card__item"><br>
+          <label for="address">Адрес</label><br>
+          <input id="address" formControlName="address"
+                 placeholder="Адрес клиента"
+                 class="form-control card__address_value" type="text">
+        </div>
+      </div>
+      <div class="client__card__item">
+        <label for="description">Описание</label><br>
+        <textarea name="description" id="description"  rows="5"
+                  formControlName="description"
+                  placeholder="Особенности клиента"
+                  class="form-control card_description">
+        </textarea>
+      </div>
+    </form>
+  </div>
+</div>

@@ -2,3 +2,12 @@
 body {
   font-family: 'Times New Roman', 'Arial';
 }
+.link {
+  text-decoration: none;
+  color: #000000;
+}
+.link:hover {
+  cursor: pointer;
+  text-decoration: none;
+  color: #000000;
+}

@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'clients',
     loadChildren: 'app/components/+clients/+clients.module#ClientsModule'
+  },
+  {
+    path: 'client',
+    loadChildren: 'app/components/+client/+client.module#ClientModule'
   }
 ];
 

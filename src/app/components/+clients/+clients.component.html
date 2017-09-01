@@ -1,6 +1,9 @@
 <div class="clients">
   <div class="clients__header">
     <h2 class="clients_title">Clients List</h2>
+    <button class="btn btn-primary clients_create">
+      Create Client
+    </button>
   </div>
   <div class="clients__content">
     <table class="table table-striped clients__list">
@@ -14,14 +17,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let client of _clients" class="list__item list__item-hover">
-          <td>{{ client.name }}</td>
+        <tr *ngFor="let client of clients" class="list__item list__item-hover">
+          <td>
+            <a (click)="openClientCard(client.id)" class="link">
+              {{ client.name }}
+            </a>
+          </td>
           <td>{{ client.phone ? client.phone : '-' }}</td>
           <td>{{ client.email ? client.email : '-' }}</td>
-          <td>{{ _getBirthdayDate(client) }}</td>
+          <td>{{ client.birthDate ? (client.birthDate | date: "dd.MM.yyyy") : '-' }}</td>
           <td>{{ client.address ? client.address : '-' }}</td>
         </tr>
-
       </tbody>
     </table>
   </div>
