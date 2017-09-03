@@ -1,34 +1,50 @@
 <div class="clients">
   <div class="clients__header">
     <h2 class="clients_title">Clients List</h2>
-    <button class="btn btn-primary clients_create">
+    <button (click)="openNewClientCard()"
+            class="btn btn-primary clients_create">
       Create Client
     </button>
   </div>
   <div class="clients__content">
-    <table class="table table-striped clients__list">
-      <thead>
-        <tr class="list__header">
-          <td>ФИО</td>
-          <td>Телефон</td>
-          <td>Email</td>
-          <td>Дата рождения</td>
-          <td>Адрес</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let client of clients" class="list__item list__item-hover">
-          <td>
+    <p-dataTable [value]="clients" [paginator]="true" [rows]="25" rowHover="true">
+      <p-column [field]="'name'" header="ФИО" [filter]="true" filterMatchMode="contains">
+        <ng-template let-col let-client="rowData" pTemplate="body">
+          <span>
             <a (click)="openClientCard(client.id)" class="link">
               {{ client.name }}
             </a>
-          </td>
-          <td>{{ client.phone ? client.phone : '-' }}</td>
-          <td>{{ client.email ? client.email : '-' }}</td>
-          <td>{{ client.birthDate ? (client.birthDate | date: "dd.MM.yyyy") : '-' }}</td>
-          <td>{{ client.address ? client.address : '-' }}</td>
-        </tr>
-      </tbody>
-    </table>
+          </span>
+        </ng-template>
+      </p-column>
+      <p-column styleClass="clients__column"
+                [field]="'phone'" header="Телефон"
+                >
+        <ng-template let-col let-client="rowData" pTemplate="body">
+          <span> {{ client.phone ? client.phone : '-' }}</span>
+        </ng-template>
+      </p-column>
+      <p-column [field]="'email'" header="Email" styleClass="clients__column">
+        <ng-template let-col let-client="rowData" pTemplate="body">
+          <span> {{ client.phone ? client.phone : '-' }}</span>
+        </ng-template>
+      </p-column>
+      <p-column [field]="'birthday'" header="Дата рождения" styleClass="clients__column">
+        <ng-template let-col let-client="rowData" pTemplate="body">
+          <span> {{ client.birthDate ? (client.birthDate | date: "dd.MM.yyyy") : '-' }}</span>
+        </ng-template>
+      </p-column>
+      <p-column [field]="'address'" header="Адрес" styleClass="clients__column">
+        <ng-template let-col let-client="rowData" pTemplate="body">
+          <span> {{ client.address ? client.address : '-' }}</span>
+        </ng-template>
+      </p-column>
+      <p-column [field]="'gender'" header="Пол" styleClass="clients__column column__gender"
+                [filter]="true" filterMatchMode="contains">
+        <ng-template let-col let-client="rowData" pTemplate="body">
+          <span> {{ client.gender ? client.gender : '-' }}</span>
+        </ng-template>
+      </p-column>
+    </p-dataTable>
   </div>
 </div>

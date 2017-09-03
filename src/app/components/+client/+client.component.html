@@ -1,51 +1,67 @@
-<div *ngIf="client" class="client">
+<div class="client">
   <div class="client__header">
-    <h3 class="client_title">Карточка клиента №{{ client.cardNumber }}</h3>
+    <h3 class="client_title">Карточка клиента</h3>
+    <button (click)="createClient()" [disabled]="clientForm ? !clientForm.valid : true"
+            class="btn btn-primary client_btn">Save New Client</button>
   </div>
-  <div class="client__card">
-    <form class="form-inline"  [formGroup]="clientForm">
+  <div *ngIf="clientForm" class="client__card">
+    <form class="form-inline"  [formGroup]="clientForm" >
       <div class="client__card__item">
-        <div class="card__item card__name">
-          <label for="name" class="card__name_label">ФИО</label><br>
-          <input id="name" type="text"
-                 formControlName="name" class="form-control card__name_value">
+        <div class="card__item card__name"
+              [ngClass]="{'has-error': !clientForm.get('name').valid && clientForm.get('name').touched,
+                          'has-success': clientForm.get('name').valid && !clientForm.get('name').touched }">
+          <label class="card__name_label">ФИО
+            <sup>*</sup></label><br>
+          <input type="text" formControlName="name"
+                 class="form-control card__name_value">
         </div>
-        <div class="card__item card__gender">
+        <div class="card__item card__gender"
+             [ngClass]="{'has-error': !clientForm.get('name').valid && clientForm.get('name').touched,
+                          'has-success': clientForm.get('name').valid && !clientForm.get('name').touched }">
+          <label>Стать<sup>*</sup></label><br>
           <input type="radio" formControlName="gender"
                  value="female" class="card__gender_checkbox">Жен.
           <input type="radio" formControlName="gender"
                  value="male" class="card__gender_checkbox">Муж.
         </div>
-        <div class="card__item card__date">
-          <label>Дата рождения</label><br>
-          <p-calendar inputStyleClass="form-control"
-                      formControlName="date" dateFormat="dd/mm/yy"
-                      >{{ client.birthDate }}</p-calendar>
+        <div class="card__item card__date"
+             [ngClass]="{'has-error': !clientForm.get('name').valid && clientForm.get('name').touched,
+                          'has-success': clientForm.get('name').valid && !clientForm.get('name').touched }">
+          <label>Дата рождения<sup>*</sup></label><br>
+          <my-date-picker formControlName="date"
+                          [options]="{ dateFormat: 'dd/mm/yyyy', width: '50%' }"
+          ></my-date-picker>
         </div>
       </div>
       <div class="client__card__item">
-        <div class="card__item ">
-          <label for="phone">Телефон</label><br>
-          <input id="phone" class="form-control card__phone_value"
-                 placeholder="+380(__)__ __ ___"
+        <div class="card__item"
+             [ngClass]="{'has-error': !clientForm.get('name').valid && clientForm.get('name').touched,
+                          'has-success': clientForm.get('name').valid && !clientForm.get('name').touched }">
+          <label>Телефон<sup>*</sup></label><br>
+          <input class="form-control card__phone_value"
+                 placeholder="0_________"
                  formControlName="phone" type="text" >
         </div>
-        <div class="card__item"><br>
-          <label for="email">Электронный адрес</label><br>
-          <input id="email" class="form-control card__email_value"
+        <div class="card__item"
+             [ngClass]="{'has-error': !clientForm.get('name').valid && clientForm.get('name').touched,
+                          'has-success': clientForm.get('name').valid && !clientForm.get('name').touched }"><br>
+          <label>Электронный адрес<sup>*</sup></label><br>
+          <input class="form-control card__email_value"
                  placeholder="example@gmail.com"
                  formControlName="email" type="email">
         </div>
-        <div class="card__item"><br>
-          <label for="address">Адрес</label><br>
-          <input id="address" formControlName="address"
+        <div class="card__item"
+             [ngClass]="{'has-error': !clientForm.get('name').valid && clientForm.get('name').touched,
+                          'has-success': clientForm.get('name').valid && !clientForm.get('name').touched }"><br>
+          <label>Адрес<sup>*</sup></label><br>
+          <input formControlName="address"
                  placeholder="Адрес клиента"
                  class="form-control card__address_value" type="text">
         </div>
       </div>
       <div class="client__card__item">
-        <label for="description">Описание</label><br>
-        <textarea name="description" id="description"  rows="5"
+        <label >Описание</label><br>
+        <textarea id="description"  rows="5"
                   formControlName="description"
                   placeholder="Особенности клиента"
                   class="form-control card_description">

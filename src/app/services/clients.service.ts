@@ -32,13 +32,22 @@ export class ClientsService {
    * @returns {Observable<R|T>}
    */
   public getClient(id: number): Observable<any> {
-    console.log(id)
     return this.http.get(this._apiUrl + '/' + id)
       .map((response: Response) => response.json())
       .map((resClient: any) => new Client(resClient))
       .catch(this.handleError);
   }
 
+  /**
+   * Post new client to API
+   * @param client {Client}
+   * @returns {Observable<R|T>}
+   */
+  public postNewClient(client: Client): Observable<any> {
+    return this.http.post(this._apiUrl, client)
+      .map((res: Response) => res.json())
+      .catch(this.handleError)
+  }
   /**
    * Catch the error
    * @param error {Response}

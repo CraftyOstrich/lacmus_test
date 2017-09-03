@@ -3,15 +3,19 @@
  */
 
 import { NgModule } from '@angular/core';
-
+import { CommonModule } from '@angular/common';
+import { DataTableModule } from 'primeng/components/datatable/datatable';
+import { SharedModule } from 'primeng/components/common/shared';
 import { ClientsRoutingModule } from './+clients-routing.module';
 import { ClientsComponent } from './+clients.component';
-import { CommonModule } from '@angular/common';
+
 
  @NgModule({
      imports: [
        CommonModule,
-       ClientsRoutingModule
+       ClientsRoutingModule,
+       DataTableModule,
+       SharedModule
      ],
      declarations: [
        ClientsComponent

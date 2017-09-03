@@ -3,12 +3,11 @@
  */
 
 import { NgModule } from '@angular/core';
-
-import { ClientComponent } from './+client.component';
-import { ClientRoutingModule } from './+client-routing.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CalendarModule } from 'primeng/components/calendar/calendar';
+import { MyDatePickerModule } from 'mydatepicker';
+import { ClientComponent } from './+client.component';
+import { ClientRoutingModule } from './+client-routing.module';
 
 @NgModule({
     imports: [
@@ -16,7 +15,7 @@ import { CalendarModule } from 'primeng/components/calendar/calendar';
       FormsModule,
       ReactiveFormsModule,
       ClientRoutingModule,
-      CalendarModule
+      MyDatePickerModule
     ],
     declarations: [
       ClientComponent

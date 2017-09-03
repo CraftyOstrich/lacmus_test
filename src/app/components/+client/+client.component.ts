@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Client } from '../../models/client';
 import { ClientsService } from '../../services/clients.service';
-import { emailValidator, phoneValidator, dateValidator } from '../../app.constants';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { emailValidator, phoneValidator } from '../../app.constants';
 
 @Component({
   selector: 'app-client',
@@ -20,7 +20,7 @@ export class ClientComponent implements OnInit {
   /**
    *
    */
-  public clientForm: FormGroup;
+  public clientForm: FormGroup = null;
 
   /**
    * Validator for client's email
@@ -41,6 +41,7 @@ export class ClientComponent implements OnInit {
   private _errorMessage: string;
 
   constructor( private _route: ActivatedRoute,
+               private _router: Router,
                private _formBuilder: FormBuilder,
                private _clientsService: ClientsService ) { }
 
@@ -54,6 +55,8 @@ export class ClientComponent implements OnInit {
               this.setUpClientForm(this.client);
             });
         } else {
+          this.client = new Client();
+          this.setUpClientForm(this.client)
         }
 
       },
@@ -64,30 +67,54 @@ export class ClientComponent implements OnInit {
    * Set up form for client and disabled field if client exist
    * @param client
    */
-  setUpClientForm(client: Client) {
+  protected setUpClientForm(client: Client) {
     this.clientForm = this._formBuilder.group({
-      'id': [client.id],
       'name': [client.name || '', [
         Validators.required
       ]],
-      'gender': [client.gender, [
+      'gender': [client.gender || '', [
         Validators.required
       ]],
-      'date': [client.birthDate || new Date()],
-      'phone': [client.phone, [
-        Validators.pattern(this.phoneValidator)
+      'date': [client.birthDateObject  || {}, [
+        Validators.required
+      ]],
+      'phone': [client.phone || '', [
+        Validators.pattern(this.phoneValidator),
+        Validators.required
+
       ]],
       'email': [client.email || '', [
         Validators.required,
         Validators.pattern(this.emailValidator)
       ]],
-      'address': [client.address],
-      'description': [client.description]
+      'address': [client.address || '', [
+        Validators.required
+      ]],
+      'description': [client.description || '']
     });
-    if (client) {
+    if (client.id) {
       for(let prop in this.clientForm.controls){
         this.clientForm.controls[prop].disable({onlySelf: true })
       }
+    }
+  }
+
+  /**
+   * Create new Client snd post it to API, redirect mo main page
+   */
+  protected createClient() {
+    if (this.clientForm.invalid) {
+    } else {
+      let newClient = {
+        ...this.clientForm.value,
+        birthYear: this.clientForm.value.date.date.year,
+        birthMonth: this.clientForm.value.date.date.month,
+        birthDay: this.clientForm.value.date.date.day
+      };
+      delete newClient.date;
+
+      this._clientsService.postNewClient(newClient)
+        .subscribe(response => this._router.navigate((['clients'])));
     }
   }
 

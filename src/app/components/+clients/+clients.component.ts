@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientsService } from '../../services/clients.service';
-import { Client } from '../../models/client';
 import { Router } from '@angular/router';
+import { Client } from '../../models/client';
+import { ClientsService } from '../../services/clients.service';
 
 @Component({
   selector: 'app-clients',
@@ -12,10 +12,9 @@ export class ClientsComponent implements OnInit {
 
   /**
    *  List of clients
-   *  @type {Client Array}
+   *  @type {Client[]}
    */
   public clients: Client[];
-
   /**
    * Error message
    */
@@ -30,10 +29,19 @@ export class ClientsComponent implements OnInit {
 
   /**
    * Open client's card
-   * @param id{number}
+   * @param id {number}
    */
   protected openClientCard(id: number) {
-    this._router.navigate(['client', id]);
+    if (id) {
+      this._router.navigate(['client', id]);
+    }
+  }
+
+  /**
+   * Open form to create new client
+   */
+  protected openNewClientCard() {
+    this._router.navigate(['client/create']);
   }
 
   /**

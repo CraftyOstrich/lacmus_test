@@ -11,3 +11,9 @@ body {
   text-decoration: none;
   color: #000000;
 }
+.clients__column {
+  text-align: center!important;
+}
+.column__gender {
+  width: 10%;
+}
