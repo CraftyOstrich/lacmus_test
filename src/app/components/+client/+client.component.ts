@@ -72,7 +72,7 @@ export class ClientComponent implements OnInit {
       'name': [client.name || '', [
         Validators.required
       ]],
-      'gender': [client.gender || '', [
+      'gender': [client.genderOrigin || '', [
         Validators.required
       ]],
       'date': [client.birthDateObject  || {}, [
