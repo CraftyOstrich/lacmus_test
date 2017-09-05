@@ -2,6 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.2.
 
+## Description
+
+A page for displaying clients with the ability to view the existing customer's card and create a new one (customer information comes from API). The user list contains fields name, phone, email, birthday and gender, for which filtering is available for gender and name. The client card provides access for viewing several additional fields as address and description.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
